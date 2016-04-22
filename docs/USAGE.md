@@ -54,6 +54,7 @@ Included is a management command to create thumbnails for images already contain
 
 See http://django-storages.readthedocs.org/en/latest/
 
+You can use CKEDITOR_UPLOAD_STORAGE settings, to define any storage different then default_storage.
 
 ## If you want to use allowedContent
 
