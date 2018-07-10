@@ -44,7 +44,8 @@ def get_upload_filename(upload_name, user):
     # Generate date based path to put uploaded file.
     # If CKEDITOR_RESTRICT_BY_DATE is True upload file to date specific path.
     if getattr(settings, 'CKEDITOR_RESTRICT_BY_DATE', True):
-        date_path = datetime.now().strftime('%Y/%m/%d')
+        format = getattr(settings, 'CKEDITOR_RESTRICT_BY_DATE_FORMAT', '%Y-%m-%d')
+        date_path = datetime.now().strftime(format)
     else:
         date_path = ''
 
