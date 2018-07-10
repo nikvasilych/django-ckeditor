@@ -1,6 +1,82 @@
 Changelog
 =========
 
+
+5.5.0
+-----
+#. CKEditor 4.9.2
+#. Documentation improvements
+#. Allow non-string properties of user for CKEDITOR_RESTRICT_BY_USER
+
+
+5.4.0
+-----
+#. Django 2.0 compatibility
+
+
+5.3.1
+-----
+#. Actually include the code which sets ``CKEDITOR_BASEPATH``.
+#. CKEditor 4.7.3
+
+
+5.3.0
+-----
+#. CKEditor 4.7
+#. Fix storage problems by setting ``CKEDITOR_BASEPATH`` (hopefully for real
+   this time)
+#. Documentation updates
+#. Added a ``CKEDITOR_RESTRICT_BY_DATE`` setting to add uploaded files into
+   folders containing the current date.
+#. Added a ``CKEDITOR_FILEICONS`` setting that allows overriding the
+   icons used by Gallerific.
+#. Added a ``CKEDITOR_FILENAME_GENERATOR`` setting which allows
+   specifying a callable which mangles the filename of uploaded files.
+#. Added ``THUMBNAIL_SIZE`` and ``IMAGE_QUALITY`` settings for the
+   Pillow image backend.
+#. Actually include static assets for ``ckeditor_uploader`` in the
+   pip-installable package.
+#. Removed ``CKEDITOR_JQUERY_URL`` and the jQuery dependency. The
+   CKEditor activation now uses plain JavaScript. Dependencies are
+   `JSON.parse <http://caniuse.com/#search=json.parse>`__ and
+   `document.querySelectorAll <http://caniuse.com/#search=querySelectorAll>`__
+   which are supported in practically all used browsers these days.
+#. Fixed a bug where the CKEditor language was not set individually for
+   each request.
+
+
+5.2.2
+-----
+#. Django 1.11 support
+#. Drop South migrations
+#. Fix storage problems by setting CKEDITOR_BASEPATH
+
+
+5.2.1
+-----
+#. Fix CKEditor package static path
+
+5.2.0
+-----
+#. Django 1.10 updates
+#. Development dependencies bump
+#. CKEditor 4.6.1
+#. Paste image support
+#. Fix for ManifestStaticFilesStorage
+
+
+5.1.1
+-----
+#. Re-add missing additional CkEditor plugins
+
+
+5.1.0
+-----
+#. Updated CkEditor to 4.5.10
+#. Django 1.10 compatibility changes
+#. Documentation updates
+
+
 5.0.3
 -----
 #. Fix file/directory browsing and searching
@@ -27,8 +103,8 @@ Changelog
 File upload support have been moved to ckeditor_uploader. The urls are in ckeditor_uploader.urls while for file uploading widget you have to use RichTextUploadingField from ckeditor_uploader.fields instead of RichTextField from  from ckeditor.fields.
 
 #. Updated ckeditor to 4.5.3 (from https://github.com/ckeditor/ckeditor-dev/tree/4.5.3)
-#. Added new plugins from ckeditor maintainers: adobeair, ajax, autoembed, autogrow, autolink, bbcode, codesnippet, codesnippetgeshi, devtools, divarea, docprops, embed, embedbase, embedsemantic, filetools, iframedialog, image2, language, lineutils, mathjax, menubutton, notification, notificationaggregator, placeholder, sharedspace, sourcedialog, stylesheetparser, tableresize, uicolor, uploadimage, uploadwidget, widget, xml 
-#. Add `zip_safe=False` on setup config, to force does not create ".egg" file 
+#. Added new plugins from ckeditor maintainers: adobeair, ajax, autoembed, autogrow, autolink, bbcode, codesnippet, codesnippetgeshi, devtools, divarea, docprops, embed, embedbase, embedsemantic, filetools, iframedialog, image2, language, lineutils, mathjax, menubutton, notification, notificationaggregator, placeholder, sharedspace, sourcedialog, stylesheetparser, tableresize, uicolor, uploadimage, uploadwidget, widget, xml
+#. Add `zip_safe=False` on setup config, to force does not create ".egg" file
 #. Add python Wheel package configuration
 #. Add setup.py functions to easy release ".egg" package and Wheel package, and tag version on git ( ``python setup.py publish`` and ``python setup.py tag`` )
 #. Improved Tox configuration to code coverage check, code quality check (flake8), imports order check (isort) and test with django master branch
@@ -143,18 +219,18 @@ File upload support have been moved to ckeditor_uploader. The urls are in ckedit
 -----
 #. Include CKEditor version 3.6.2.
 #. Initial work on Django aligned theme.
-#. Fix schema slash removal issue on media url generation. Thanks `mwcz <https://github.com/mwcz>`_
-#. Added compatibility for South. Thanks `3point2 <https://github.com/3point2>`_
-#. Prevented settings from leaking between widget instances. Thanks `3point2 <https://github.com/3point2>`_
-#. Fixed config_name conflict when verbose_name is used as first positional argument for a field. Thanks `3point2 <https://github.com/3point2>`_
-#. Refactored views to allow use of file walking with local paths. Thanks `3point2 <https://github.com/3point2>`_
-#. Added command to generate thumbnails. Thanks `3point2 <https://github.com/3point2>`_
+#. Fix schema slash removal issue on media url generation. Thanks `mwcz <https://github.com/mwcz>`__
+#. Added compatibility for South. Thanks `3point2 <https://github.com/3point2>`__
+#. Prevented settings from leaking between widget instances. Thanks `3point2 <https://github.com/3point2>`__
+#. Fixed config_name conflict when verbose_name is used as first positional argument for a field. Thanks `3point2 <https://github.com/3point2>`__
+#. Refactored views to allow use of file walking with local paths. Thanks `3point2 <https://github.com/3point2>`__
+#. Added command to generate thumbnails. Thanks `3point2 <https://github.com/3point2>`__
 #. Migrated from using media to static file management.
 
 0.0.9
 -----
 
-#. Added ability to configure CKeditor through a CKEDITOR_CONFIGS settings. Thanks `jeffh <https://github.com/jeffh>`_ for the input.
+#. Added ability to configure CKeditor through a CKEDITOR_CONFIGS settings. Thanks `jeffh <https://github.com/jeffh>`__ for the input.
 
 0.0.8
 -----
@@ -168,14 +244,14 @@ File upload support have been moved to ckeditor_uploader. The urls are in ckedit
 0.0.6
 -----
 #. Enforce correct configuration.
-#. Changed upload behavior to separate files into directories by upload date. Thanks `loop0 <http://github.com/loop0>`_ .
-#. Added ability to limit user access to uploaded content (see the CKEDITOR_RESTRICT_BY_USER setting). Thanks `chr15m <http://github.com/chr15m>`_ for the input.
+#. Changed upload behavior to separate files into directories by upload date. Thanks `loop0 <http://github.com/loop0>`__ .
+#. Added ability to limit user access to uploaded content (see the CKEDITOR_RESTRICT_BY_USER setting). Thanks `chr15m <http://github.com/chr15m>`__ for the input.
 #. Added initial set of much needed tests.
 #. General cleanup, light refactor.
 
 0.0.5
 -----
-#. csrf_exempt backwards compatability. Thanks `chr15m <http://github.com/chr15m>`_ .
+#. csrf_exempt backwards compatability. Thanks `chr15m <http://github.com/chr15m>`__ .
 
 0.0.4
 -----
@@ -183,7 +259,7 @@ File upload support have been moved to ckeditor_uploader. The urls are in ckedit
 
 0.0.3
 -----
-#. More robust PIL import. Thanks `buchuki <http://github.com/buchuki>`_ .
+#. More robust PIL import. Thanks `buchuki <http://github.com/buchuki>`__ .
 #. Better CKEDITOR_MEDIA_PREFIX setting error.
 
 0.0.2
@@ -192,5 +268,5 @@ File upload support have been moved to ckeditor_uploader. The urls are in ckedit
 
 0.0.1
 -----
-#. Added CKEDITOR_UPLOAD_PREFIX setting. Thanks `chr15m <http://github.com/chr15m>`_ for the input.
+#. Added CKEDITOR_UPLOAD_PREFIX setting. Thanks `chr15m <http://github.com/chr15m>`__ for the input.
 

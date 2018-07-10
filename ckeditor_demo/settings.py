@@ -77,7 +77,7 @@ INSTALLED_APPS = (
     'ckeditor_demo.demo_application',
 )
 
-MIDDLEWARE_CLASSES = (
+_MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,6 +85,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+if django.VERSION >= (1, 10):
+    MIDDLEWARE = _MIDDLEWARE
+else:
+    MIDDLEWARE_CLASSES = _MIDDLEWARE
 
 ROOT_URLCONF = 'ckeditor_demo.urls'
 
@@ -124,4 +128,7 @@ MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'ck_media')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+# New
+IMAGE_QUALITY = 40
+THUMBNAIL_SIZE = (300, 300)

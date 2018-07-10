@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import setup, find_packages
 
-version = '5.0.3'
+version = __import__('ckeditor').__version__
 
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')
@@ -16,13 +16,18 @@ if sys.argv[-1] == 'tag':
     os.system("git push --tags")
     sys.exit()
 
-long_description = open('README.rst', 'r').read() + open('AUTHORS.rst', 'r').read() + open('CHANGELOG.rst', 'r').read()
+long_description = "\n".join([
+    open('README.rst', 'r').read(),
+    open('AUTHORS.rst', 'r').read(),
+    open('CHANGELOG.rst', 'r').read(),
+])
 
 
 def get_source_files():
     for dirname, _, files in os.walk('ckeditor/static/ckeditor/ckeditor/_source'):
         for filename in files:
             yield os.path.join('/'.join(dirname.split('/')[1:]), filename)
+
 
 setup(
     name='django-ckeditor',
@@ -35,7 +40,7 @@ setup(
     packages=find_packages(exclude=["*.demo"]),
     zip_safe=False,
     install_requires=[
-        'Django',
+        'django-js-asset',
     ],
     include_package_data=True,
     classifiers=[
@@ -43,6 +48,8 @@ setup(
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Framework :: Django",
