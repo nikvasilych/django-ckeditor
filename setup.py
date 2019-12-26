@@ -40,7 +40,7 @@ setup(
     packages=find_packages(exclude=["*.demo"]),
     zip_safe=False,
     install_requires=[
-        'django-js-asset',
+        'django-js-asset>=1.2.2',
     ],
     include_package_data=True,
     classifiers=[
@@ -50,6 +50,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
         "Framework :: Django",

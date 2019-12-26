@@ -1,6 +1,37 @@
 Changelog
 =========
 
+5.8.0
+-----
+#. CKEditor 4.13
+
+5.7.1
+-----
+#. CKEditor 4.11.4
+#. Fix JS handling again
+#. Allow using settings to configure ``extra_plugins`` and
+   ``external_plugin_resources``
+
+
+5.7.0
+-----
+#. Fix Django 1.8 - 1.10 regression
+#. Drop leftover support for Django older than 1.8
+#. Django 2.2 support
+#. Documentation updates
+#. Minor fixes to JS handling
+
+
+5.6.1
+-----
+#. Fix bad pypi package
+
+
+5.6.0
+-----
+#. Django 2.1 compatibility, minimal supported Django version is 1.11 LTS
+#. Option to set custom django file backend for CKEditor uploader app.
+
 
 5.5.0
 -----

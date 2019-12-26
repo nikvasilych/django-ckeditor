@@ -4,7 +4,6 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
-from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.functional import Promise
 from django.utils.html import conditional_escape
@@ -12,6 +11,21 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 
 from js_asset import JS, static
+
+try:
+    # Django >=1.11
+    from django.forms.widgets import get_default_renderer
+except ImportError:
+    # Django <1.11
+    from django.template.loader import render_to_string
+
+    def get_default_renderer():
+        class DummyDjangoRenderer(object):
+            @staticmethod
+            def render(*args, **kwargs):
+                return render_to_string(*args, **kwargs)
+
+        return DummyDjangoRenderer
 
 try:
     # Django >=1.7
@@ -56,6 +70,7 @@ class CKEditorWidget(forms.Textarea):
     Widget providing CKEditor for Rich Text Editing.
     Supports direct image uploads and embed.
     """
+
     class Media:
         js = (
             JS('ckeditor/ckeditor-init.js', {
@@ -96,14 +111,24 @@ class CKEditorWidget(forms.Textarea):
                 raise ImproperlyConfigured('CKEDITOR_CONFIGS setting must be a\
                         dictionary type.')
 
-        extra_plugins = extra_plugins or []
+        extra_plugins = (
+            extra_plugins
+            or self.config.pop("extra_plugins", None)
+            or []
+        )
 
         if extra_plugins:
             self.config['extraPlugins'] = ','.join(extra_plugins)
 
-        self.external_plugin_resources = external_plugin_resources or []
+        self.external_plugin_resources = (
+            external_plugin_resources
+            or self.config.pop("external_plugin_resources", None)
+            or []
+        )
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
+        if renderer is None:
+            renderer = get_default_renderer()
         if value is None:
             value = ''
         final_attrs = self.build_attrs(self.attrs, attrs, name=name)
@@ -111,7 +136,7 @@ class CKEditorWidget(forms.Textarea):
         external_plugin_resources = [[force_text(a), force_text(b), force_text(c)]
                                      for a, b, c in self.external_plugin_resources]
 
-        return mark_safe(render_to_string('ckeditor/widget.html', {
+        return mark_safe(renderer.render('ckeditor/widget.html', {
             'final_attrs': flatatt(final_attrs),
             'value': conditional_escape(force_text(value)),
             'id': final_attrs['id'],
